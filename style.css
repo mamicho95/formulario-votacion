@@ -1,0 +1,44 @@
+.votacion {
+    display: flex;
+    justify-content: center;
+}
+.form {
+  background-color: rgb(39, 46, 61);
+  color: ghostwhite;
+  font-size: medium;
+  border-radius: 10px;
+  padding: 2%;
+}
+.form h1 {
+  text-align: center;
+}
+.form .votar{
+    text-align: center;
+}
+.form input[type=text]{
+    width: -webkit-fill-available;
+    font-size: 13;
+    padding: 1.5%;
+}
+.form select{
+    width: -webkit-fill-available;
+    text-align: center;
+    font-size: 13;
+    padding: 1.5%;
+}
+.form button{
+    width: 50%;
+    margin-top: 3%;
+    border-radius: 7px;
+    color: blanchedalmond;
+    background-color: #1b1b2d;
+    font-size: 18px;
+    padding: 1.5%;
+}
+.valmensaje{
+    color: rgb(225, 81, 81);
+    visibility: hidden;
+}
+body {
+  background-color: rgb(18, 28, 49);
+}
