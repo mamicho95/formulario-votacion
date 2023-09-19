@@ -1,15 +1,19 @@
 <?php
 if (isset($_POST['region_id'])) {
-    $conexion = mysqli_connect("localhost", "root", "", "votacion");
-    $consulta = "SELECT * FROM comuna where region_id = " . $_POST['region_id']." order by nombre asc";
-    $resultados = mysqli_query($conexion, $consulta);
-    while ($fila = mysqli_fetch_assoc($resultados)) {
+    require_once 'conexionDB.php'; 
+    $region_id = $_POST['region_id'];
+    $db = new Database();
+    $dataVotacion = new GetDataVotacion($db);
+    
+    $regiones = $dataVotacion->getComunas($region_id);
+    foreach ($regiones as $region) {
         ?>
-        <option value='<?php echo $fila['id'];?>'> <?php echo $fila['nombre'];?></option>
+        <option value='<?php echo $region['id'];?>'> <?php echo $region['nombre'];?></option>
         <?php
     }
-    mysqli_close($conexion);
-    //echo json_encode($comunas);
+    if($region_id == 0){
+        echo '<option value="0" selected>-Seleccione comuna-</option>';
+    }
 } else {
     echo json_encode(array('success' => 0));
 }

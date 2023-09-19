@@ -42,3 +42,7 @@
 body {
   background-color: rgb(18, 28, 49);
 }
+.checks-captacion{
+    display: flex;
+    justify-content: space-around;
+}

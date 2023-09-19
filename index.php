@@ -1,3 +1,11 @@
+<?php
+require_once 'conexionDB.php';
+$db = new Database();
+$dataVotacion = new GetDataVotacion($db);
+
+$regiones = $dataVotacion->getRegiones();
+$candidatos = $dataVotacion->getCandidatos();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,22 +15,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="validaciones.js"></script>
+    <script src="funciones.js"></script>
     <title>Formulario de Votacion</title>
-    <script>
-        function getComuna(val) {
-            $.ajax({
-                type: "POST",
-                url: "comuna.php",
-                data: { region_id: val },
-                success: function (data) {
-                    $("#comuna").html(data);
-                }, error: function (data) {
-                    alert("error");
-                }
-            });
-        }
-
-    </script>
 </head>
 <body>
     <div class="votacion">
@@ -77,22 +71,10 @@
                     <td>
                         <select class="campo" id="region" name="region" onchange="getComuna(this.value)">
                             <option value="0" selected>-Seleccione region-</option>
-                            
                             <?php
-                            try {
-                                $conexion = mysqli_connect("localhost", "root", "", "votacion");
-                                $consulta = "SELECT * FROM region order by orden asc";
-                                $resultados = mysqli_query($conexion, $consulta);
-                                if (!$resultados) {
-                                    throw new Exception("Error de consulta: " . mysqli_error($conexion));
-                                }                                                      
-                                while ($fila = mysqli_fetch_assoc($resultados)) {
-                                    echo "<option value='" . $fila['id'] . "'>" . $fila['nombre'] . "</option>";
-                                }
-                            } catch (Exception $e) {
-                                echo "Error: " . $e->getMessage();
+                            foreach ($regiones as $region) {
+                                echo "<option value='" . $region['id'] . "'>" . $region['nombre'] . "</option>";
                             }
-                            mysqli_close($conexion);
                             ?>
                         </select>
                         <label id="valregion" class="valmensaje" for="region">Debe seleccionar una región</label>
@@ -118,20 +100,9 @@
                             <option value="0" selected>-Seleccione candidato-</option>
                             
                             <?php
-                            try {
-                                $conexion = mysqli_connect("localhost", "root", "", "votacion");
-                                $consulta = "SELECT * FROM candidato";
-                                $resultados = mysqli_query($conexion, $consulta);
-                                if (!$resultados) {
-                                    throw new Exception("Error de consulta: " . mysqli_error($conexion));
-                                }                                                      
-                                while ($fila = mysqli_fetch_assoc($resultados)) {
-                                    echo "<option value='" . $fila['id'] . "'>" . $fila['nombre'] . "</option>";
-                                }
-                            } catch (Exception $e) {
-                                echo "Error: " . $e->getMessage();
+                            foreach ($candidatos as $candidato) {
+                                echo "<option value='" . $candidato['id'] . "'>" . $candidato['nombre'] . "</option>";
                             }
-                            mysqli_close($conexion);
                             ?>
                         </select>
                         <label id="valcandidato" class="valmensaje" for="candidato">Debe seleccionar un candidato</label>
@@ -141,7 +112,7 @@
                     <td>
                         <label>Como se entero de Nosotros</label>
                     </td>
-                    <td>
+                    <td class="checks-captacion">
                         <label><input type="checkbox" name="cbox1" value="1">Web</label>
                         <label><input type="checkbox" name="cbox2" value="2">TV</label>
                         <label><input type="checkbox" name="cbox3" value="3">Redes Sociales</label>

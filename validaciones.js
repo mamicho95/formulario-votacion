@@ -1,21 +1,21 @@
 function formateaRut(rut) {
-  var actual = rut.replace(/^0+/, "");
+  let actual = rut.replace(/^0+/, "");
   if (actual != "" && actual.length > 0) {
-    var sinPuntos = actual.replace(/\./g, "");
-    var actualLimpio = sinPuntos.replace(/-/g, "");
-    var inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-    var rutPuntos = "";
-    var i = 0;
-    var j = 1;
+    let sinPuntos = actual.replace(/\./g, "");
+    let actualLimpio = sinPuntos.replace(/-/g, "");
+    let inicio = actualLimpio.substring(0, actualLimpio.length - 1);
+    let rutPuntos = "";
+    let i = 0;
+    let j = 1;
     for (i = inicio.length - 1; i >= 0; i--) {
-      var letra = inicio.charAt(i);
+      let letra = inicio.charAt(i);
       rutPuntos = letra + rutPuntos;
       if (j % 3 == 0 && j <= inicio.length - 1) {
         rutPuntos = "." + rutPuntos;
       }
       j++;
     }
-    var dv = actualLimpio.substring(actualLimpio.length - 1);
+    let dv = actualLimpio.substring(actualLimpio.length - 1);
     rutPuntos = rutPuntos + "-" + dv;
   }
   return rutPuntos;
@@ -23,17 +23,17 @@ function formateaRut(rut) {
 function VerificaRut(rut) {
   rut = rut.replace(/\./g, "", "");
   if (rut.toString().trim() != "" && rut.toString().indexOf("-") > 0) {
-    var caracteres = new Array();
-    var serie = new Array(2, 3, 4, 5, 6, 7);
-    var dig = rut.toString().substr(rut.toString().length - 1, 1);
+    let caracteres = new Array();
+    let serie = new Array(2, 3, 4, 5, 6, 7);
+    let dig = rut.toString().substr(rut.toString().length - 1, 1);
     rut = rut.toString().substr(0, rut.toString().length - 2);
-    for (var i = 0; i < rut.length; i++) {
+    for (let i = 0; i < rut.length; i++) {
       caracteres[i] = parseInt(rut.charAt(rut.length - (i + 1)));
     }
-    var sumatoria = 0;
-    var k = 0;
-    var resto = 0;
-    for (var j = 0; j < caracteres.length; j++) {
+    let sumatoria = 0;
+    let k = 0;
+    let resto = 0;
+    for (let j = 0; j < caracteres.length; j++) {
       if (k == 6) {
         k = 0;
       }
@@ -57,7 +57,7 @@ function VerificaRut(rut) {
   }
 }
 function validarEmail(email) {
-    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (regex.test(email)) {
       return true; 
@@ -72,22 +72,21 @@ $(document).ready(function () {
   $("#formulario").on("submit", function (event) {
     event.preventDefault(); // Evita el envío del formulario por defecto
 
-    var nombre = $("#name").val();
-    var alias = $("#alias").val();
-    var rut = $("#rut").val();
-    var email = $("#email").val();
-    var region = $("#region").val();
-    var candidato = $("#candidato").val();
-    var checkboxesSeleccionados = $('input[type="checkbox"]:checked');
-
-    var valid = true;
+    let nombre = $("#name").val();
+    let alias = $("#alias").val();
+    let rut = $("#rut").val();
+    let email = $("#email").val();
+    let region = $("#region").val();
+    let candidato = $("#candidato").val();
+    let checkboxesSeleccionados = $('input[type="checkbox"]:checked');
+    let valid = true;
     if (nombre === "") {
       $("#valname").css("visibility", "visible");
       valid = false;
     } else {
       $("#valname").css("visibility", "hidden");
     }
-    var regex = /^(?=.*[a-zA-Z])(?=.*\d).{5,}$/;
+    let regex = /^(?=.*[a-zA-Z])(?=.*\d).{5,}$/;
     if (!regex.test(alias)) {
       $("#valalias").css("visibility", "visible");
       valid = false;
@@ -132,7 +131,7 @@ $(document).ready(function () {
     if (!valid) {
       return;
     }
-    var datos = $(this).serialize();
+    let datos = $(this).serialize();
     //console.log(datos);
     $.ajax({
       url: "nuevoUsuario.php",
@@ -148,14 +147,13 @@ $(document).ready(function () {
           $("#comuna").html(
             '<option value="0" selected>-Seleccione comuna-</option>'
           );
-          $("#candidato").html(
-            '<option value="0" selected>-Seleccione candidato-</option>'
-          );
+          $("#region option[value='0']").prop("selected", true);
+          $("#candidato option[value='0']").prop("selected", true);
           $("#formulario")[0].reset();
         }
       },
       error: function (error) {
-        alert("Error");
+        alert("Error", error);
       },
     });
   });
