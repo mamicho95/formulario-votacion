@@ -1,10 +1,11 @@
 function formateaRut(rut) {
+  let rutPuntos = "";
   let actual = rut.replace(/^0+/, "");
   if (actual != "" && actual.length > 0) {
     let sinPuntos = actual.replace(/\./g, "");
     let actualLimpio = sinPuntos.replace(/-/g, "");
     let inicio = actualLimpio.substring(0, actualLimpio.length - 1);
-    let rutPuntos = "";
+    
     let i = 0;
     let j = 1;
     for (i = inicio.length - 1; i >= 0; i--) {
