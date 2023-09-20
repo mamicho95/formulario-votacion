@@ -21,12 +21,12 @@ $candidatos = $dataVotacion->getCandidatos();
 <body>
     <div class="votacion">
         <form id="formulario" class="form" method="post">
-            <table border="0px">
-                <tr>
-                    <td colspan="2">
+        <div class="titulo">
                         <h1>Formulario de Votación</h1>
-                    </td>
-                </tr>
+                        <img src="imagenes/votacion.png" alt="icono" width="50px">
+                    </div>
+            <table border="0px">
+
                 <tr>
                     <td>
                         <label for="name">Nombre y Apellido</label>

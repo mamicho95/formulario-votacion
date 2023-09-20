@@ -9,9 +9,6 @@
   border-radius: 10px;
   padding: 2%;
 }
-.form h1 {
-  text-align: center;
-}
 .form .votar{
     text-align: center;
 }
@@ -45,4 +42,9 @@ body {
 .checks-captacion{
     display: flex;
     justify-content: space-around;
+}
+.titulo{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5px;
 }

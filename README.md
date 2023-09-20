@@ -23,14 +23,19 @@ Antes de comenzar, asegúrate de tener instalado XAMPP v3.3.0 en tu sistema.
    - En macOS: `/Applications/XAMPP/xamppfiles/htdocs`
    - En Linux: `/opt/lampp/htdocs`
 
-4. Importa la base de datos (si es necesario):
+4. Configure el usuario y la contrasena de la base de datos:
+   - Abre la carpeta del proyecto.
+   - Edite el archivo 'conexionDB.php'.
+   - cambie el usuario y contrasena de su usuario para la base de datos.
+
+5. Importa la base de datos (si es necesario):
    - Abre phpMyAdmin desde el panel de control de XAMPP o accediendo a `http://localhost/phpmyadmin` en tu navegador.
    - Crea una nueva base de datos con el nombre "votacion".
    - Selecciona la base de datos recién creada y ve a la pestaña "Importar".
    - Haz clic en el botón "Examinar" para seleccionar el archivo SQL del proyecto que contiene la estructura y los datos de la base de datos.
    - Haz clic en "Continuar" para importar la base de datos.
 
-5. Accede al proyecto desde tu navegador web:
+6. Accede al proyecto desde tu navegador web:
    - Abre tu navegador web y visita `http://localhost/formulario-votacion`.
 
 
